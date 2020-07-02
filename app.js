@@ -7,6 +7,7 @@ var bP = require("body-parser");
 var port = process.env.PORT || 3000;
 var isLoggedIn = 0;
 var firstTime = 1;
+var acc_type ="", acct_status ="";
 var fn, fullname,datelog,timelog;
 var d = new Date();
 const request = require('request');
@@ -19,7 +20,8 @@ mongoose.connect(url, {useNewUrlParser: true});
 var loginSchema = new mongoose.Schema({
 	uname: String,
   pword: String,
-  fulln: String
+  fulln: String,
+  account: String
 });
 var loginlogsSchema = new mongoose.Schema({
   LogFullN: String,
@@ -27,10 +29,16 @@ var loginlogsSchema = new mongoose.Schema({
   LogTime: String,
   LogCount: String
 });
+var loginlevelsSchema = new mongoose.Schema({
+  level: String,
+  status: String
+});
 //connect Login schema to loginProcess object
 var loginProcess = mongoose.model("logins",loginSchema);
 //Connect Loginlogs Schema to loginlogs object
 var loginLogs = mongoose.model("loginlogs",loginlogsSchema);
+//Connect loginlevels schema to loginlevels object
+var loginLevels = mongoose.model("loginlevels",loginlevelsSchema);
 
 app.use(bP.urlencoded({extended: true}));
 app.use(ex.static("public"));
@@ -42,7 +50,7 @@ app.get("/", function (req, res) {
     }
   else
     {
-      res.render("index.ejs",{fullname:fn,dl:datelog,tl:timelog});
+      res.render("index.ejs",{fullname:fn,dl:datelog,tl:timelog,acc_type:acct_status});
     }
 });
 app.get("/login", function(req,res){
@@ -66,12 +74,29 @@ app.post("/loginprocess", function(req,res){
     return
   }
   else{
+    //Login Success Flag
     isLoggedIn = 1;
+    //store Full name found in DB to fn
     fn = data[0].fulln;
+    //store account type # (0,1,2) to acc_type
+    acc_type = data[0].account;
+
+    //START OF WIP use acc_type to find account status (Administrator, Super Administrator, User) and store to acct_status
+    //loginLevels.find({level:acc_type}), function(err, data){
+    //     acct_status = data[0].status;
+    //};
+    //END OF WIP
+    //Temp Code
+
+    acct_status = acc_type;
+
+    //determine number of logins of this account
     numlog = loginLogs.countDocuments({LogFullN:fn});
     numlog++;
+    //save date and time of login
     datelog = d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear();
     timelog = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    //add to login log with acquired date, time and total number of logins+1
     newlog = new loginLogs({LogFullN:fn,LogDate:datelog,LogTime:timelog,LogCount:numlog});
     newlog.save(function (err,book) {
       

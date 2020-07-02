@@ -7,7 +7,22 @@
 <body>
 Hello <%=fullname%>!
 <br>
+Account Type: <%=acc_type%><br>
 Date Logged in:<%=dl%><br>
 Time Logged In:<%=tl%><br>
+<hr>
+<h2>Menu</h2>
+<% if (acc_type==0){ %>
+    <a href="#">View Users</a><br>
+    <a href="#">Add User</a><br>
+    <a href="#">Modify User</a><br>
+    <a href="#">Delete User</a><br>
+    <a href="#">View Logs</a><br>
+<% } %>
+<hr>
+<a href="#">View Items</a><br>
+<a href="#">Add Item</a><br>
+<a href="#">Modify Item</a><br>
+<a href="#">Delete Item</a><br>
 </body>
 </html>
