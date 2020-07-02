@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>View Items</title>
+    </head>
+<body>
+<h1>View Items</h1>
+<table border=1>
+    <tr>
+        <td>Brand</td>
+        <td>Name</td>
+        <td>Color</td>
+        <td>Price</td>
+        <td>Quantity</td>
+    </tr>
+<% ditems.forEach(function(ditems){ %>
+    <tr>
+        <td><%=ditems.ibrand %></td>
+        <td><%=ditems.iname %></td>
+        <td><%=ditems.icolor %></td>
+        <td><%=ditems.iprice %></td>
+        <td><%=ditems.iqty %></td>
+    </tr>
+<% }) %>
+</table>
+</body>
+</html>

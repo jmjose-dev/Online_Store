@@ -23,15 +23,26 @@ var loginSchema = new mongoose.Schema({
   fulln: String,
   account: String
 });
+//define schema of LoginLogs Collection
 var loginlogsSchema = new mongoose.Schema({
   LogFullN: String,
   LogDate: String,
   LogTime: String,
   LogCount: String
 });
+//define schema of LoginLevel Collection
 var loginlevelsSchema = new mongoose.Schema({
   level: String,
   status: String
+});
+//define schema for clitems Collection
+var itemsSchema = new mongoose.Schema({
+  id: String,
+  iname: String,
+  ibrand: String,
+  icolor: String,
+  iprice: String,
+  iqty: String
 });
 //connect Login schema to loginProcess object
 var loginProcess = mongoose.model("logins",loginSchema);
@@ -39,10 +50,10 @@ var loginProcess = mongoose.model("logins",loginSchema);
 var loginLogs = mongoose.model("loginlogs",loginlogsSchema);
 //Connect loginlevels schema to loginlevels object
 var loginLevels = mongoose.model("loginlevels",loginlevelsSchema);
-
+//Connect clitems schema to cl_items object
+var cl_items = mongoose.model("clitems",itemsSchema);
 app.use(bP.urlencoded({extended: true}));
 app.use(ex.static("public"));
-
 app.get("/", function (req, res) {
   if (isLoggedIn==0)
     {
@@ -55,6 +66,20 @@ app.get("/", function (req, res) {
 });
 app.get("/login", function(req,res){
   res.render("login.ejs",{isLogged:isLoggedIn,ft:firstTime});
+});
+app.get("/items", function(req,res){
+  cl_items.find({}, function(err, ditems){
+    if(err){
+      console.log(err);
+    }
+    else
+    {
+      res.render("items.ejs", {ditems:ditems});
+    }
+
+
+
+  });
 });
 app.post("/loginprocess", function(req,res){
   var un,pw,numlog=0;
