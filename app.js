@@ -44,6 +44,11 @@ var itemsSchema = new mongoose.Schema({
   iprice: String,
   iqty: String
 });
+//define schema for clbrands collection
+var brandsSchema = new mongoose.Schema({
+  ibrand: String,
+  ishortcode: String
+});
 //connect Login schema to loginProcess object
 var loginProcess = mongoose.model("logins",loginSchema);
 //Connect Loginlogs Schema to loginlogs object
@@ -52,8 +57,12 @@ var loginLogs = mongoose.model("loginlogs",loginlogsSchema);
 var loginLevels = mongoose.model("loginlevels",loginlevelsSchema);
 //Connect clitems schema to cl_items object
 var cl_items = mongoose.model("clitems",itemsSchema);
+//connect brands Schema to cl_brands object
+var cl_brands = mongoose.model("clbrands",brandsSchema);
 app.use(bP.urlencoded({extended: true}));
 app.use(ex.static("public"));
+
+//root. Will redirect to /login if not yet logged in, otherwise will go to index.ejs
 app.get("/", function (req, res) {
   if (isLoggedIn==0)
     {
@@ -64,23 +73,12 @@ app.get("/", function (req, res) {
       res.render("index.ejs",{fullname:fn,dl:datelog,tl:timelog,acc_type:acct_status});
     }
 });
+
+//login page
 app.get("/login", function(req,res){
   res.render("login.ejs",{isLogged:isLoggedIn,ft:firstTime});
 });
-app.get("/items", function(req,res){
-  cl_items.find({}, function(err, ditems){
-    if(err){
-      console.log(err);
-    }
-    else
-    {
-      res.render("items.ejs", {ditems:ditems});
-    }
-
-
-
-  });
-});
+//login processing
 app.post("/loginprocess", function(req,res){
   var un,pw,numlog=0;
   var newLog;
@@ -105,16 +103,13 @@ app.post("/loginprocess", function(req,res){
     fn = data[0].fulln;
     //store account type # (0,1,2) to acc_type
     acc_type = data[0].account;
-
     //START OF WIP use acc_type to find account status (Administrator, Super Administrator, User) and store to acct_status
     //loginLevels.find({level:acc_type}), function(err, data){
     //     acct_status = data[0].status;
     //};
     //END OF WIP
     //Temp Code
-
     acct_status = acc_type;
-
     //determine number of logins of this account
     numlog = loginLogs.countDocuments({LogFullN:fn});
     numlog++;
@@ -137,8 +132,59 @@ app.post("/loginprocess", function(req,res){
     res.redirect("/");
     }
  });
- 
 });
+
+//view items
+app.get("/items", function(req,res){
+  cl_items.find({}, function(err, ditems){
+    if(err){
+      console.log(err);
+    }
+    else
+    {
+      res.render("items.ejs", {ditems:ditems});
+    }
+  });
+});
+//add new item
+app.get("/items/additem", function(req, res){
+  cl_brands.find({}, function(err, dbrands){
+    if(err){
+      console.log(err);
+    }
+    else
+    {
+      res.render("additem.ejs", {dbrands:dbrands});
+    }
+
+  });
+});
+//process the added item
+app.post("/items", function(req,res){
+  cl_items.create(req.body.ditems, function(err, newItem){
+      if(err)
+      {
+        res.render("additem.ejs");
+      }
+      else
+      {
+        res.redirect("/items");
+      }
+  });
+});
+//Edit Item
+app.get("/items/:id/edit", function(req, res){
+  cl_items.findById(req.params.id, function(err, foundI){
+    if(err){
+        res.redirect("/items");
+    }
+    else
+    {
+      res.render("edititem.ejs", {eitem:foundI});
+    }
+  });
+});
+
 app.listen(port, function () {
   console.log("Server is running");
 });

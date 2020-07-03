@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Edit Item:<%= eitem.iname %></title>
+    </head>
+<body>
+    <h1>Edit Item</h1>
+    <br>
+    <form method="PUT" action="/items/id">
+        <table>
+            <tr>
+                <td>Item Brand</td>
+                <td><input type="text" value="<%= eitem.ibrand %>" name="ditems[ibrand]"></td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" value="<%= eitem.iname %>" name="ditems[iname]"></td>
+            </tr>
+            <tr>
+                <td>Color:</td>
+                <td><input type="text" value="<%= eitem.icolor %>" name="ditems[icolor]"></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input type="text" value="<%= eitem.iprice %>" name="ditems[iprice]"></td>
+            </tr>
+            <tr>
+                <td>Quantity:</td>
+                <td><input type="text" value="<%= eitem.iqty %>" name="ditems[iqty]"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Add Item" name="addnew"></td>
+                <td><input type="reset" value="Clear Values" name="clearval"></td>
+            </tr>
+        </table>
+    </form>
+
+
+</body>
+</html>

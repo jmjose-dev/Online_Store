@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Add New Item</title>
+    </head>
+<body>
+    <h1>Add New Item</h1>
+    <br>
+    <form method="POST" action="/items">
+        <table>
+            <tr>
+                <td>Item Brand</td>
+                <td><select name="ditems[ibrand]">
+                    <% dbrands.forEach(function(dbrands){ %>
+                        <option><%=dbrands.ibrand %></option>
+                    <% }) %>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" name="ditems[iname]"></td>
+            </tr>
+            <tr>
+                <td>Color:</td>
+                <td><input type="text" name="ditems[icolor]"></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input type="text" name="ditems[iprice]"></td>
+            </tr>
+            <tr>
+                <td>Quantity:</td>
+                <td><input type="text" name="ditems[iqty]"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Add Item" name="addnew"></td>
+                <td><input type="reset" value="Clear Values" name="clearval"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

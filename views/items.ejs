@@ -11,6 +11,7 @@
         <td>Color</td>
         <td>Price</td>
         <td>Quantity</td>
+        <td></td>
     </tr>
 <% ditems.forEach(function(ditems){ %>
     <tr>
@@ -19,6 +20,7 @@
         <td><%=ditems.icolor %></td>
         <td><%=ditems.iprice %></td>
         <td><%=ditems.iqty %></td>
+        <td><a href="items/<%=ditems._id %>/edit">Edit Item</a></td>
     </tr>
 <% }) %>
 </table>
