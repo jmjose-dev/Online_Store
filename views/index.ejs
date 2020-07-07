@@ -2,16 +2,29 @@
 <head>
     <title>Main Menu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="design.css" type="text/css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
 </head>
 <body>
-Hello <%=fullname%>!
-<br>
-Account Type: <%=acc_type%><br>
-Date Logged in:<%=dl%><br>
-Time Logged In:<%=tl%><br>
-<hr>
+    <div class="grid-x grid-padding-y grid-padding-x">
+        <div class="grid-y endless-river" style="height:100vh;">
+            <div class="cell large-2">
+                Hello <%=fullname%>!
+            </div>
+            <div class="cell large-2">
+                Account Type: <%=acc_type%>
+            </div>
+            <div class="cell large-2">
+                Date Logged in:<%=dl%>
+            </div>
+            <div class="cell large-2">
+                Time Logged In:<%=tl%>
+            </div>
+        </div>
+    </div>
+    
 <h2>Menu</h2>
 <% if (acc_type==0){ %>
     <a href="#">View Users</a><br>
