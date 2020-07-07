@@ -5,31 +5,31 @@
 <body>
     <h1>Edit Item</h1>
     <br>
-    <form method="PUT" action="/items/id">
+    <form action="/items/<%= eitem._id %>?_method=PUT" method="POST">
         <table>
             <tr>
                 <td>Item Brand</td>
-                <td><input type="text" value="<%= eitem.ibrand %>" name="ditems[ibrand]"></td>
+                <td><input type="text" value="<%= eitem.ibrand %>" name="upItem[ibrand]"></td>
             </tr>
             <tr>
                 <td>Name:</td>
-                <td><input type="text" value="<%= eitem.iname %>" name="ditems[iname]"></td>
+                <td><input type="text" value="<%= eitem.iname %>" name="upItem[iname]"></td>
             </tr>
             <tr>
                 <td>Color:</td>
-                <td><input type="text" value="<%= eitem.icolor %>" name="ditems[icolor]"></td>
+                <td><input type="text" value="<%= eitem.icolor %>" name="upItem[icolor]"></td>
             </tr>
             <tr>
                 <td>Price:</td>
-                <td><input type="text" value="<%= eitem.iprice %>" name="ditems[iprice]"></td>
+                <td><input type="text" value="<%= eitem.iprice %>" name="upItem[iprice]"></td>
             </tr>
             <tr>
                 <td>Quantity:</td>
-                <td><input type="text" value="<%= eitem.iqty %>" name="ditems[iqty]"></td>
+                <td><input type="text" value="<%= eitem.iqty %>" name="upItem[iqty]"></td>
             </tr>
             <tr>
-                <td><input type="submit" value="Add Item" name="addnew"></td>
-                <td><input type="reset" value="Clear Values" name="clearval"></td>
+                <td><input type="submit" value="Edit Item" name="editItem"></td>
+                <td><input type="reset" value="Clear Values" name="clearVal"></td>
             </tr>
         </table>
     </form>
