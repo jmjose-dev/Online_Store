@@ -4,6 +4,8 @@ var ej = require("ejs");
 var mongoose = require("mongoose");
 var app = ex();
 var bP = require("body-parser"); 
+var methodOverride = require("method-override");
+var sanitizer = require("express-sanitizer");
 var port = process.env.PORT || 3000;
 var isLoggedIn = 0;
 var firstTime = 1;
@@ -61,7 +63,8 @@ var cl_items = mongoose.model("clitems",itemsSchema);
 var cl_brands = mongoose.model("clbrands",brandsSchema);
 app.use(bP.urlencoded({extended: true}));
 app.use(ex.static("public"));
-
+app.use(methodOverride("_method"));
+app.use(sanitizer());
 //root. Will redirect to /login if not yet logged in, otherwise will go to index.ejs
 app.get("/", function (req, res) {
   if (isLoggedIn==0)
@@ -162,6 +165,7 @@ app.get("/items/additem", function(req, res){
 //process the added item
 app.post("/items", function(req,res){
   cl_items.create(req.body.ditems, function(err, newItem){
+      req.body.ditems = sanitizer(req.body.ditems);
       if(err)
       {
         res.render("additem.ejs");
@@ -184,7 +188,40 @@ app.get("/items/:id/edit", function(req, res){
     }
   });
 });
+//UPDATE route
+app.put("/items/:id", function(req, res){
+  req.body.ditems = sanitizer(req.body.upItem);
+  cl_items.findByIdAndUpdate(req.params.id,req.body.upItem,function(err, updateItem)
+  {
 
+    if(err)
+    {
+      res.redirect("/items");
+    }
+    else
+    {
+      res.redirect("/items");
+    }
+  });
+
+});
+app.get("/items/:id/destroy", function(req, res){
+  cl_items.findByIdAndDelete(req.params.id,function (err, deletedItem){
+    if(err)
+    {
+      res.redirect("/items");
+    }
+    else
+    {
+      res.redirect("/items");
+    }
+  });
+
+
+
+
+
+});
 app.listen(port, function () {
   console.log("Server is running");
 });
