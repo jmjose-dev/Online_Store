@@ -9,31 +9,34 @@
 </head>
 <body>
     <div class="grid-x grid-padding-y grid-padding-x">
-        <div class="grid-y endless-river" style="height:100vh;">
-            <div class="cell large-2">
-                Hello <%=fullname%>!
+        <div class="grid-y skyline grid-padding-x grid-padding-y">
+            <div class="cell large-1">
+                <span class="white-text">Hello <%=fullname%>!</span>
             </div>
-            <div class="cell large-2">
+            <div class="cell large-1">
                 Account Type: <%=acc_type%>
             </div>
-            <div class="cell large-2">
+            <div class="cell large-1">
                 Date Logged in:<%=dl%>
             </div>
-            <div class="cell large-2">
+            <div class="cell large-1">
                 Time Logged In:<%=tl%>
             </div>
+            <div class="cell large-1">
+                <h2>Menu</h2>
+            </div>
+            <% if (acc_type==0){ %>
+            <div class="cell large-1">
+                <a href="#">View Users</a><br>
+                <a href="#">Add User</a><br>
+                <a href="#">Modify User</a><br>
+                <a href="#">Delete User</a><br>
+                <a href="#">View Logs</a><br>
+            </div>
+            <% } %>
+
         </div>
     </div>
-    
-<h2>Menu</h2>
-<% if (acc_type==0){ %>
-    <a href="#">View Users</a><br>
-    <a href="#">Add User</a><br>
-    <a href="#">Modify User</a><br>
-    <a href="#">Delete User</a><br>
-    <a href="#">View Logs</a><br>
-<% } %>
-<hr>
 <a href="/items">View Items</a><br>
 <a href="/items/additem">Add Item</a><br>
 <a href="#">Modify Item</a><br>
