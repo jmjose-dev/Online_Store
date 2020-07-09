@@ -3,43 +3,39 @@
     <title>Main Menu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="design.css" type="text/css">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/dedfb313b8.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="grid-x grid-padding-y grid-padding-x">
-        <div class="grid-y skyline grid-padding-x grid-padding-y">
-            <div class="cell large-1">
-                <span class="white-text">Hello <%=fullname%>!</span>
-            </div>
-            <div class="cell large-1">
-                Account Type: <%=acc_type%>
-            </div>
-            <div class="cell large-1">
-                Date Logged in:<%=dl%>
-            </div>
-            <div class="cell large-1">
-                Time Logged In:<%=tl%>
-            </div>
-            <div class="cell large-1">
-                <h2>Menu</h2>
-            </div>
-            <% if (acc_type==0){ %>
-            <div class="cell large-1">
-                <a href="#">View Users</a><br>
-                <a href="#">Add User</a><br>
-                <a href="#">Modify User</a><br>
-                <a href="#">Delete User</a><br>
-                <a href="#">View Logs</a><br>
-            </div>
-            <% } %>
 
+</head>
+<body onload="$(document).foundation()">
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas position-left" id="offCanvas" data-off-canvas data-tranisition="overlap">
+            <button class="close-button" aria-label="Close menu" type="button" data-close>
+                <i class="far fa-times-circle"></i>
+            </button>
+            <ul>
+                <li><span class="white-text">Hello <%=fullname%>!</span></li>
+                <li>Account Type: <%=acc_type%></li>
+                <li>Date Logged in:<%=dl%></li>
+                <li>Time Logged In:<%=tl%></li>
+            </ul>
+            Menu
+            <% if (acc_type==0){ %>
+            <ul>
+                <li><a href="#">View Users</a></li>
+                <li><a href="#">Add User</a></li>
+            </ul>
+            <% } %>
+            <ul>
+                <li><a href="/items">View Items</a></li>
+                <li><a href="/items/additem">Add Item</a></li>
+            </ul>
+        </div>
+        <div class="off-canvas-content" data-off-canvas-content>
+            <button type="button" class="button" data-toggle="offCanvas"><i class="fas fa-bars"></i></button>
         </div>
     </div>
-<a href="/items">View Items</a><br>
-<a href="/items/additem">Add Item</a><br>
-<a href="#">Modify Item</a><br>
-<a href="#">Delete Item</a><br>
 </body>
 </html>
