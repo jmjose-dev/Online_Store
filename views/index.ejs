@@ -7,35 +7,45 @@
     <script src="https://kit.fontawesome.com/dedfb313b8.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
 
 </head>
 <body onload="$(document).foundation()">
     <div class="off-canvas-wrapper">
-        <div class="off-canvas position-left" id="offCanvas" data-off-canvas data-tranisition="overlap">
-            <button class="close-button" aria-label="Close menu" type="button" data-close>
-                <i class="far fa-times-circle"></i>
-            </button>
-            <ul>
-                <li><span class="white-text">Hello <%=fullname%>!</span></li>
-                <li>Account Type: <%=acc_type%></li>
-                <li>Date Logged in:<%=dl%></li>
-                <li>Time Logged In:<%=tl%></li>
+        <div class="off-canvas position-left skyline" id="offCanvas" data-off-canvas data-tranisition="overlap">
+            <ul class="vertical menu">
+                <li class="menu-text"><i class="fas fa-user"></i> <%=fullname%></li>
+                <li class="menu-text"><%=acc_type%></li>
+                <li class="is-active"><a href="#"><i class="fas fa-home"></i> Home</a></li>
             </ul>
-            Menu
             <% if (acc_type==0){ %>
-            <ul>
-                <li><a href="#">View Users</a></li>
-                <li><a href="#">Add User</a></li>
+            <ul class="vertical menu">
+                <li><a href="#"><i class="fas fa-users"></i> View Users</a></li>
+                <li><a href="#"><i class="fas fa-user-plus"></i> Add User</a></li>
             </ul>
             <% } %>
-            <ul>
-                <li><a href="/items">View Items</a></li>
+            <ul class="vertical menu">
+                <li><a href="/items"> <i class="fas fa-car-side"></i> View Items</a></li>
                 <li><a href="/items/additem">Add Item</a></li>
             </ul>
+            <ul class="vertical menu">
+                <li><a href="/login"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+            </ul>
         </div>
-        <div class="off-canvas-content" data-off-canvas-content>
-            <button type="button" class="button" data-toggle="offCanvas"><i class="fas fa-bars"></i></button>
+        <div class="off-canvas-content title-bar" data-off-canvas-content>
+            <div class="title-bar-left icons">
+                <button type="button" data-toggle="offCanvas"><i class="fas fa-bars white-text"></i></button>
+                <span class="title-bar-title"> Die-Cast Inventory System</span>
+            </div>
         </div>
     </div>
+    <div class="callout success small" data-closable="slide-out-right">
+        <button class="close-button" aria-label="Close alert" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p>Hello <%=fullname%>! </p>
+        <p>Date Logged In: <%= dl %></p>
+        <p>Time Logged In: <%= tl %></p>
+      </div>
 </body>
 </html>

@@ -78,7 +78,7 @@ app.get("/", function (req, res) {
       res.render("index.ejs",{fullname:fn,dl:datelog,tl:timelog,acc_type:acct_status});
     }
     */
-   res.render("index.ejs",{fullname:"Jan Michael",dl:"07/08/2020",tl:"8:48",acc_type:"0"});
+   res.render("index.ejs",{fullname:"Jan Michael",dl:"07/08/2020",tl:"8:48",acc_type:"2"});
 
 });
 

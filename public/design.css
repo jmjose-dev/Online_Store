@@ -9,6 +9,10 @@ background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, F
     background-color:white;
 
 }
+.bgblack
+{
+    background-color:black;
+}
 .white-text
 {
     color:#fefefe;
